@@ -22,6 +22,7 @@ project/assembly_name="LD58Collector"
 [global_group]
 
 Enemy=""
+Pickup=""
 
 [input]
 

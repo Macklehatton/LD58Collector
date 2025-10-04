@@ -13,9 +13,12 @@ public partial class RandomSword : Node2D
     [Export] private Sprite2D sprite;
     [Export] private Node2D swordTip;
     [Export] private CollisionShape2D collisionShape;
+    [Export] private Area2D collisionArea;
 
     [ExportToolButton("Randomize")]
     public Callable RandomizeButton => Callable.From(Randomize);
+
+    public bool Dropped { get; set; }
 
     public override void _Ready()
     {
@@ -58,5 +61,10 @@ public partial class RandomSword : Node2D
         };
 
         collisionShape.Position = new Vector2(0.0f, -(pixelHeight * length) / 2.0f);
+    }
+
+    public void SetDropped()
+    {
+        collisionArea.AddToGroup("Pickup");
     }
 }

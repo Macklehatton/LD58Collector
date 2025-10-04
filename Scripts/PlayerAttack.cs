@@ -40,7 +40,7 @@ public partial class PlayerAttack : Node2D
 
     public void CheckHit()
     {
-        if (weaponArea.HasOverlappingBodies())
+        if (weaponArea.HasOverlappingAreas())
         {
             Array<Area2D> bodies = weaponArea.GetOverlappingAreas();
             foreach (Area2D body in bodies)
