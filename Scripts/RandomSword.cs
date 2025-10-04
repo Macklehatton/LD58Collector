@@ -26,6 +26,14 @@ public partial class RandomSword : Node2D
         Randomize();
     }
 
+    public override void _Process(double delta)
+    {
+        if (Input.IsActionJustPressed("Randomize"))
+        {
+            Randomize();
+        }
+    }
+
     private void Randomize()
     {
         RandomNumberGenerator rng = new RandomNumberGenerator();
