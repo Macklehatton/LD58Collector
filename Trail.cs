@@ -6,29 +6,36 @@ public partial class Trail : Line2D
     [Export] private Node2D swordTip;
     [Export] private int pointCount;
 
-    [Export] private double rate;
-
-    private double timeSinceUpdate;
+    //private Vector2 trailPosition;
+    private int pointsAdded;
 
     public override void _Ready()
     {
+        //trailPosition = swordTip.GlobalPosition;
     }
 
-    public override void _Process(double delta)
+    public void StopTrail()
     {
-        timeSinceUpdate += delta;
-        if (timeSinceUpdate < rate)
+        Reset();
+    }
+
+    public void UpdateTrail(float factor)
+    {
+        int currentPoint = (int)(pointCount * factor);
+
+        if (pointsAdded >= currentPoint)
         {
             return;
         }
 
-        timeSinceUpdate = 0.0f;
+        //trailPosition = trailPosition.MoveToward(swordTip.GlobalPosition, trailSpeed * (float)delta);
 
         AddPoint(swordTip.GlobalPosition);
+    }
 
-        if (Points.Length > pointCount)
-        {
-            RemovePoint(0);
-        }
+    private void Reset()
+    {
+        ClearPoints();
+        pointsAdded = 0;
     }
 }

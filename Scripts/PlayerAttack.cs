@@ -5,6 +5,7 @@ using System.Diagnostics;
 public partial class PlayerAttack : Node2D
 {
     [Export] private Node2D weaponObject;
+    [Export] private Trail trail;
     [Export] private float swingTime;
     [Export] private float swingAngle;
 
@@ -43,11 +44,14 @@ public partial class PlayerAttack : Node2D
 
         weaponObject.Rotation = Mathf.Lerp(-swingAngle, swingAngle, swingFactor);
 
+        trail.UpdateTrail(swingProgress);
+
         if (swingProgress >= swingTime)
         {
             weaponObject.Rotation = 0.0f;
             swingProgress = 0.0f;
             attacking = false;
+            trail.StopTrail();
         }
     }
 }

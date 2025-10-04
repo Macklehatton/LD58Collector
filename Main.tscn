@@ -29,15 +29,16 @@ round_precision = 32
 antialiased = true
 script = ExtResource("6_lgr22")
 swordTip = NodePath("../CharacterBody2D/WeaponPointing/Sword/SwordTip")
-pointCount = 256
+pointCount = 164
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_uu6xs")
 speed = 200.0
 
-[node name="PlayerAttack" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("weaponObject")]
+[node name="PlayerAttack" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("weaponObject", "trail")]
 script = ExtResource("2_3dxm6")
 weaponObject = NodePath("../WeaponPointing/Sword")
+trail = NodePath("../../Trail")
 swingTime = 0.2
 swingAngle = 1.5
 

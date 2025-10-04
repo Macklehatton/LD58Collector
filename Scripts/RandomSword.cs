@@ -28,12 +28,14 @@ public partial class RandomSword : Node2D
 
     public override void _Process(double delta)
     {
-#if !TOOLS
+        if (Engine.IsEditorHint())
+        {
+            return;
+        }
         if (Input.IsActionJustPressed("Randomize"))
         {
             Randomize();
         }
-#endif
     }
 
     private void Randomize()
