@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx8vvh801ws8k"]
+[gd_scene load_steps=10 format=3 uid="uid://cx8vvh801ws8k"]
 
 [ext_resource type="Script" uid="uid://ciw83583k6dr" path="res://Scripts/PlayerMovement.cs" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://brrvxwtxdvw7q" path="res://Scripts/PlayerAttack.cs" id="2_3dxm6"]
@@ -6,10 +6,30 @@
 [ext_resource type="Script" uid="uid://cp7pam07eek7r" path="res://Scripts/PlayerWeapon.cs" id="2_fos0i"]
 [ext_resource type="Texture2D" uid="uid://dywjlx80hdfgq" path="res://icon.svg" id="2_r0du0"]
 [ext_resource type="Texture2D" uid="uid://ckpteoyej48yw" path="res://Textures/SwordTile.png" id="3_r0du0"]
+[ext_resource type="Script" uid="uid://bfnqj1owfxkse" path="res://Trail.cs" id="6_lgr22"]
+
+[sub_resource type="Curve" id="Curve_trn2v"]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lgr22"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Trail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
+show_behind_parent = true
+width = 20.0
+width_curve = SubResource("Curve_trn2v")
+gradient = SubResource("Gradient_lgr22")
+joint_mode = 2
+round_precision = 32
+antialiased = true
+script = ExtResource("6_lgr22")
+swordTip = NodePath("../CharacterBody2D/WeaponPointing/Sword/SwordTip")
+pointCount = 256
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_uu6xs")
@@ -18,8 +38,8 @@ speed = 200.0
 [node name="PlayerAttack" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("weaponObject")]
 script = ExtResource("2_3dxm6")
 weaponObject = NodePath("../WeaponPointing/Sword")
-swingTime = 1.0
-swingAngle = 1.0
+swingTime = 0.2
+swingAngle = 1.5
 
 [node name="WeaponPointing" type="Node2D" parent="CharacterBody2D"]
 script = ExtResource("2_fos0i")
@@ -36,6 +56,9 @@ sprite = NodePath("SwordSprite")
 scale = Vector2(1.11588, 2.02444)
 texture = ExtResource("3_r0du0")
 offset = Vector2(0, -16)
+
+[node name="SwordTip" type="Node2D" parent="CharacterBody2D/WeaponPointing/Sword"]
+position = Vector2(0, -61)
 
 [node name="CharacterSprite" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(0.25, 0.25)
