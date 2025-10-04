@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cx8vvh801ws8k"]
 
 [ext_resource type="Script" uid="uid://ciw83583k6dr" path="res://Scripts/PlayerMovement.cs" id="1_uu6xs"]
-[ext_resource type="Script" uid="uid://nxtkoh1lhekg" path="res://PlayerAttack.cs" id="2_3dxm6"]
+[ext_resource type="Script" uid="uid://brrvxwtxdvw7q" path="res://Scripts/PlayerAttack.cs" id="2_3dxm6"]
 [ext_resource type="Script" uid="uid://cmv5p5f4wpkl" path="res://Scripts/RandomSword.cs" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://cp7pam07eek7r" path="res://Scripts/PlayerWeapon.cs" id="2_fos0i"]
 [ext_resource type="Texture2D" uid="uid://dywjlx80hdfgq" path="res://icon.svg" id="2_r0du0"]
