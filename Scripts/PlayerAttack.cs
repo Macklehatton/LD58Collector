@@ -39,7 +39,9 @@ public partial class PlayerAttack : Node2D
     {
         swingProgress += delta;
 
-        weaponObject.Rotation = Mathf.Pi / 2.0f;
+        float swingFactor = swingProgress / swingTime;
+
+        weaponObject.Rotation = Mathf.Lerp(-swingAngle, swingAngle, swingFactor);
 
         if (swingProgress >= swingTime)
         {
