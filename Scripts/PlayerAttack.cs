@@ -42,8 +42,8 @@ public partial class PlayerAttack : Node2D
     {
         if (weaponArea.HasOverlappingBodies())
         {
-            Array<Node2D> bodies = weaponArea.GetOverlappingBodies();
-            foreach (Node2D body in bodies)
+            Array<Area2D> bodies = weaponArea.GetOverlappingAreas();
+            foreach (Area2D body in bodies)
             {
                 if (body.IsInGroup(targetGroup))
                 {

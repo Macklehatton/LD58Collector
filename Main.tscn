@@ -35,13 +35,13 @@ script = ExtResource("6_lgr22")
 swordTip = NodePath("../Player/WeaponPointing/RandomSword/SwordTip")
 pointCount = 256
 
-[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player") groups=["Enemy"]]
+[node name="Enemy" type="Area2D" parent="." node_paths=PackedStringArray("player") groups=["Enemy"]]
 position = Vector2(110, 0)
 script = ExtResource("2_trn2v")
 player = NodePath("../Player")
 aggroRange = 10.0
 speed = 180.0
-waryDistance = 2.0
+waryDistance = 150.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="Enemy"]
 scale = Vector2(0.25, 0.25)
