@@ -34,7 +34,7 @@ script = ExtResource("6_lgr22")
 swordTip = NodePath("../Player/WeaponPointing/RandomSword/SwordTip")
 pointCount = 256
 
-[node name="Enemy" type="CharacterBody2D" parent="." groups=["Enemies"]]
+[node name="Enemy" type="CharacterBody2D" parent="." groups=["Enemy"]]
 position = Vector2(110, 0)
 
 [node name="CharacterSprite" type="Sprite2D" parent="Enemy"]
@@ -49,12 +49,14 @@ polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64
 script = ExtResource("1_uu6xs")
 speed = 200.0
 
-[node name="PlayerAttack" type="Node2D" parent="Player" node_paths=PackedStringArray("weaponObject", "trail")]
+[node name="PlayerAttack" type="Node2D" parent="Player" node_paths=PackedStringArray("weaponObject", "weaponArea", "trail")]
 script = ExtResource("2_3dxm6")
 weaponObject = NodePath("../WeaponPointing/RandomSword")
+weaponArea = NodePath("../WeaponPointing/RandomSword/Area2D")
 trail = NodePath("../../Trail")
 swingTime = 0.2
 swingAngle = 1.5
+targetGroup = "Enemy"
 
 [node name="WeaponPointing" type="Node2D" parent="Player"]
 script = ExtResource("2_fos0i")
@@ -67,9 +69,10 @@ minWidth = 0.25
 maxWidth = 1.25
 sprite = NodePath("SwordSprite")
 swordTip = NodePath("SwordTip")
-collisionShape = NodePath("AnimatableBody2D/CollisionShape2D")
+collisionShape = NodePath("Area2D/CollisionShape2D")
 
 [node name="SwordSprite" type="Sprite2D" parent="Player/WeaponPointing/RandomSword"]
+z_index = -1
 scale = Vector2(1.11588, 2.02444)
 texture = ExtResource("3_r0du0")
 offset = Vector2(0, -16)
@@ -77,10 +80,9 @@ offset = Vector2(0, -16)
 [node name="SwordTip" type="Node2D" parent="Player/WeaponPointing/RandomSword"]
 position = Vector2(0, -61)
 
-[node name="AnimatableBody2D" type="AnimatableBody2D" parent="Player/WeaponPointing/RandomSword"]
-collision_layer = 2
+[node name="Area2D" type="Area2D" parent="Player/WeaponPointing/RandomSword"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/WeaponPointing/RandomSword/AnimatableBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/WeaponPointing/RandomSword/Area2D"]
 shape = SubResource("RectangleShape2D_lgr22")
 
 [node name="CharacterSprite" type="Sprite2D" parent="Player"]

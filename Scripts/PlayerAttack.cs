@@ -1,10 +1,13 @@
 using Godot;
 using System;
+using Godot.Collections;
 using System.Diagnostics;
 
 public partial class PlayerAttack : Node2D
 {
     [Export] private Node2D weaponObject;
+    [Export] private Area2D weaponArea;
+
     [Export] private Trail trail;
     [Export] private float swingTime;
     [Export] private float swingAngle;
@@ -34,7 +37,18 @@ public partial class PlayerAttack : Node2D
 
     public void CheckHit()
     {
-        // Detect (one?) hit during swing
+        if (weaponArea.HasOverlappingBodies())
+        {
+            Array<Node2D> bodies = weaponArea.GetOverlappingBodies();
+            foreach (Node2D body in bodies)
+            {
+                if (body.IsInGroup(targetGroup))
+                {
+                    Debug.WriteLine(targetGroup);
+                    //(Enemy)
+                }
+            }
+        }
     }
 
     private void Swing(float delta)
