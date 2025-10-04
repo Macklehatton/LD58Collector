@@ -13,7 +13,7 @@ public partial class PlayerMovement : CharacterBody2D
 
         Vector2 movement = new Vector2(xInput, -yInput);
 
-        Velocity = movement.Normalized() * speed;
+        Velocity = movement.Normalized() * speed * (float)delta;
 
         MoveAndSlide();
     }
