@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cx8vvh801ws8k"]
+[gd_scene load_steps=11 format=3 uid="uid://cx8vvh801ws8k"]
 
 [ext_resource type="Script" uid="uid://ciw83583k6dr" path="res://Scripts/PlayerMovement.cs" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://brrvxwtxdvw7q" path="res://Scripts/PlayerAttack.cs" id="2_3dxm6"]
@@ -9,44 +9,57 @@
 [ext_resource type="Script" uid="uid://bfnqj1owfxkse" path="res://Trail.cs" id="6_lgr22"]
 
 [sub_resource type="Curve" id="Curve_trn2v"]
-_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.761636), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_lgr22"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgr22"]
+size = Vector2(32, 32)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Trail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
-show_behind_parent = true
 position = Vector2(1, 0)
-width = 30.0
+width = 50.0
 width_curve = SubResource("Curve_trn2v")
 gradient = SubResource("Gradient_lgr22")
-joint_mode = 2
+joint_mode = 1
 round_precision = 32
 antialiased = true
 script = ExtResource("6_lgr22")
-swordTip = NodePath("../CharacterBody2D/WeaponPointing/Sword/SwordTip")
+swordTip = NodePath("../Player/WeaponPointing/RandomSword/SwordTip")
 pointCount = 256
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Enemy" type="CharacterBody2D" parent="." groups=["Enemies"]]
+position = Vector2(110, 0)
+
+[node name="CharacterSprite" type="Sprite2D" parent="Enemy"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_r0du0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy"]
+scale = Vector2(0.25, 0.25)
+polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
+
+[node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_uu6xs")
 speed = 200.0
 
-[node name="PlayerAttack" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("weaponObject", "trail")]
+[node name="PlayerAttack" type="Node2D" parent="Player" node_paths=PackedStringArray("weaponObject", "trail")]
 script = ExtResource("2_3dxm6")
-weaponObject = NodePath("../WeaponPointing/Sword")
+weaponObject = NodePath("../WeaponPointing/RandomSword")
 trail = NodePath("../../Trail")
 swingTime = 0.2
 swingAngle = 1.5
 
-[node name="WeaponPointing" type="Node2D" parent="CharacterBody2D"]
+[node name="WeaponPointing" type="Node2D" parent="Player"]
 script = ExtResource("2_fos0i")
 
-[node name="Sword" type="Node2D" parent="CharacterBody2D/WeaponPointing" node_paths=PackedStringArray("sprite", "swordTip")]
+[node name="RandomSword" type="Node2D" parent="Player/WeaponPointing" node_paths=PackedStringArray("sprite", "swordTip", "collisionShape")]
 script = ExtResource("2_cm0pq")
 minLength = 1.5
 maxLength = 4.0
@@ -54,24 +67,26 @@ minWidth = 0.25
 maxWidth = 1.25
 sprite = NodePath("SwordSprite")
 swordTip = NodePath("SwordTip")
+collisionShape = NodePath("AnimatableBody2D/CollisionShape2D")
 
-[node name="SwordSprite" type="Sprite2D" parent="CharacterBody2D/WeaponPointing/Sword"]
+[node name="SwordSprite" type="Sprite2D" parent="Player/WeaponPointing/RandomSword"]
 scale = Vector2(1.11588, 2.02444)
 texture = ExtResource("3_r0du0")
 offset = Vector2(0, -16)
 
-[node name="SwordTip" type="Node2D" parent="CharacterBody2D/WeaponPointing/Sword"]
+[node name="SwordTip" type="Node2D" parent="Player/WeaponPointing/RandomSword"]
 position = Vector2(0, -61)
 
-[node name="CharacterSprite" type="Sprite2D" parent="CharacterBody2D"]
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="Player/WeaponPointing/RandomSword"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/WeaponPointing/RandomSword/AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_lgr22")
+
+[node name="CharacterSprite" type="Sprite2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_r0du0")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(308, 57)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_r0du0")

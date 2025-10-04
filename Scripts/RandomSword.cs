@@ -10,17 +10,12 @@ public partial class RandomSword : Node2D
     [Export] private float minWidth;
     [Export] private float maxWidth;
 
-    [Export] Sprite2D sprite;
-    [Export] Node2D swordTip;
+    [Export] private Sprite2D sprite;
+    [Export] private Node2D swordTip;
+    [Export] private CollisionShape2D collisionShape;
 
     [ExportToolButton("Randomize")]
     public Callable RandomizeButton => Callable.From(Randomize);
-
-    [ExportToolButton("Min")]
-    public Callable MinButton => Callable.From(Min);
-    [ExportToolButton("Max")]
-    public Callable MaxButton => Callable.From(Max);
-
 
     public override void _Ready()
     {
@@ -46,25 +41,22 @@ public partial class RandomSword : Node2D
         float width = rng.RandfRange(minWidth, maxWidth);
 
         sprite.Scale = new Vector2(width, length);
-        OffsetBladeSprite(length);
+        OffsetBladeSprite(width, length);
     }
 
-    private void Min()
-    {
-        sprite.Scale = new Vector2(minWidth, minLength);
-        OffsetBladeSprite(minLength);
-    }
-
-    private void Max()
-    {
-        sprite.Scale = new Vector2(maxWidth, maxLength);
-        OffsetBladeSprite(maxLength);
-    }
-
-    private void OffsetBladeSprite(float length)
+    private void OffsetBladeSprite(float width, float length)
     {
         float pixelHeight = sprite.Texture.GetHeight();
+        float pixelWidth = sprite.Texture.GetWidth();
+
         sprite.Offset = new Vector2(0.0f, -pixelHeight / 2.0f);
         swordTip.Position = new Vector2(0.0f, -pixelHeight * length);
+
+        collisionShape.Shape = new RectangleShape2D()
+        {
+            Size = new Vector2(pixelWidth * width, pixelHeight * length)
+        };
+
+        collisionShape.Position = new Vector2(0.0f, -(pixelHeight * length) / 2.0f);
     }
 }

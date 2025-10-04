@@ -8,6 +8,7 @@ public partial class PlayerAttack : Node2D
     [Export] private Trail trail;
     [Export] private float swingTime;
     [Export] private float swingAngle;
+    [Export] private string targetGroup;
 
     private bool attacking;
     private bool hit;
