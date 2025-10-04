@@ -7,7 +7,6 @@ public partial class PlayerWeapon : Node2D
     {
         var camera = GetViewport().GetCamera2D();
         Vector2 mousePosition = camera.GetGlobalMousePosition();
-        //Vector2 direction = GlobalPosition - mousePosition;
 
         LookAt(mousePosition);
         Rotate(Mathf.Pi / 2.0f);
