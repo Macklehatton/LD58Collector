@@ -15,8 +15,9 @@
 script = ExtResource("1_uu6xs")
 speed = 200.0
 
-[node name="PlayerAttack" type="Node2D" parent="CharacterBody2D"]
+[node name="PlayerAttack" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("weapon")]
 script = ExtResource("2_3dxm6")
+weapon = NodePath("../PlayerWeapon")
 
 [node name="PlayerWeapon" type="Node2D" parent="CharacterBody2D"]
 script = ExtResource("2_fos0i")
@@ -30,7 +31,7 @@ maxWidth = 1.25
 sprite = NodePath("SwordSprite")
 
 [node name="SwordSprite" type="Sprite2D" parent="CharacterBody2D/PlayerWeapon/Sword"]
-scale = Vector2(0.747405, 2.80921)
+scale = Vector2(0.62755, 2.21802)
 texture = ExtResource("3_r0du0")
 offset = Vector2(0, -16)
 
