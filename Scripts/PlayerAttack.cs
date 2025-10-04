@@ -27,7 +27,10 @@ public partial class PlayerAttack : Node2D
                 attacking = true;
             }
         }
+    }
 
+    public override void _PhysicsProcess(double delta)
+    {
         if (attacking)
         {
             Swing((float)delta);

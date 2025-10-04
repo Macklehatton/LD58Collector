@@ -1,0 +1,1 @@
+public enum EnemyState { none, idle, wary, attack }

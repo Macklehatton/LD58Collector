@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cmv5p5f4wpkl" path="res://Scripts/RandomSword.cs" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://cp7pam07eek7r" path="res://Scripts/PlayerWeapon.cs" id="2_fos0i"]
 [ext_resource type="Texture2D" uid="uid://dywjlx80hdfgq" path="res://icon.svg" id="2_r0du0"]
-[ext_resource type="Script" uid="uid://ce25jfr12pud8" path="res://Enemy.cs" id="2_trn2v"]
+[ext_resource type="Script" uid="uid://ce25jfr12pud8" path="res://Scripts/Enemy.cs" id="2_trn2v"]
 [ext_resource type="Texture2D" uid="uid://ckpteoyej48yw" path="res://Textures/SwordTile.png" id="3_r0du0"]
 [ext_resource type="Script" uid="uid://bfnqj1owfxkse" path="res://Scripts/Trail.cs" id="6_lgr22"]
 
@@ -16,8 +16,8 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_lgr22"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgr22"]
-size = Vector2(35.5424, 114.217)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trn2v"]
+size = Vector2(10.6317, 86.7207)
 
 [node name="Node2D" type="Node2D"]
 
@@ -35,9 +35,13 @@ script = ExtResource("6_lgr22")
 swordTip = NodePath("../Player/WeaponPointing/RandomSword/SwordTip")
 pointCount = 256
 
-[node name="Enemy" type="CharacterBody2D" parent="." groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player") groups=["Enemy"]]
 position = Vector2(110, 0)
 script = ExtResource("2_trn2v")
+player = NodePath("../Player")
+aggroRange = 10.0
+speed = 180.0
+waryDistance = 2.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="Enemy"]
 scale = Vector2(0.25, 0.25)
@@ -75,18 +79,18 @@ collisionShape = NodePath("Area2D/CollisionShape2D")
 
 [node name="SwordSprite" type="Sprite2D" parent="Player/WeaponPointing/RandomSword"]
 z_index = -1
-scale = Vector2(1.1107, 3.56929)
+scale = Vector2(0.33224, 2.71002)
 texture = ExtResource("3_r0du0")
 offset = Vector2(0, -16)
 
 [node name="SwordTip" type="Node2D" parent="Player/WeaponPointing/RandomSword"]
-position = Vector2(0, -114.217)
+position = Vector2(0, -86.7207)
 
 [node name="Area2D" type="Area2D" parent="Player/WeaponPointing/RandomSword"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/WeaponPointing/RandomSword/Area2D"]
-position = Vector2(0, -57.1087)
-shape = SubResource("RectangleShape2D_lgr22")
+position = Vector2(0, -43.3604)
+shape = SubResource("RectangleShape2D_trn2v")
 
 [node name="CharacterSprite" type="Sprite2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
