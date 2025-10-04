@@ -21,7 +21,8 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
 
 [node name="Trail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
 show_behind_parent = true
-width = 20.0
+position = Vector2(1, 0)
+width = 30.0
 width_curve = SubResource("Curve_trn2v")
 gradient = SubResource("Gradient_lgr22")
 joint_mode = 2
@@ -29,7 +30,7 @@ round_precision = 32
 antialiased = true
 script = ExtResource("6_lgr22")
 swordTip = NodePath("../CharacterBody2D/WeaponPointing/Sword/SwordTip")
-pointCount = 164
+pointCount = 256
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_uu6xs")
@@ -45,13 +46,14 @@ swingAngle = 1.5
 [node name="WeaponPointing" type="Node2D" parent="CharacterBody2D"]
 script = ExtResource("2_fos0i")
 
-[node name="Sword" type="Node2D" parent="CharacterBody2D/WeaponPointing" node_paths=PackedStringArray("sprite")]
+[node name="Sword" type="Node2D" parent="CharacterBody2D/WeaponPointing" node_paths=PackedStringArray("sprite", "swordTip")]
 script = ExtResource("2_cm0pq")
 minLength = 1.5
 maxLength = 4.0
 minWidth = 0.25
 maxWidth = 1.25
 sprite = NodePath("SwordSprite")
+swordTip = NodePath("SwordTip")
 
 [node name="SwordSprite" type="Sprite2D" parent="CharacterBody2D/WeaponPointing/Sword"]
 scale = Vector2(1.11588, 2.02444)

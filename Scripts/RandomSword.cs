@@ -11,6 +11,7 @@ public partial class RandomSword : Node2D
     [Export] private float maxWidth;
 
     [Export] Sprite2D sprite;
+    [Export] Node2D swordTip;
 
     [ExportToolButton("Randomize")]
     public Callable RandomizeButton => Callable.From(Randomize);
@@ -45,24 +46,25 @@ public partial class RandomSword : Node2D
         float width = rng.RandfRange(minWidth, maxWidth);
 
         sprite.Scale = new Vector2(width, length);
-        OffsetBlade();
+        OffsetBladeSprite(length);
     }
 
     private void Min()
     {
         sprite.Scale = new Vector2(minWidth, minLength);
-        OffsetBlade();
+        OffsetBladeSprite(minLength);
     }
 
     private void Max()
     {
         sprite.Scale = new Vector2(maxWidth, maxLength);
-        OffsetBlade();
+        OffsetBladeSprite(maxLength);
     }
 
-    private void OffsetBlade()
+    private void OffsetBladeSprite(float length)
     {
         float pixelHeight = sprite.Texture.GetHeight();
         sprite.Offset = new Vector2(0.0f, -pixelHeight / 2.0f);
+        swordTip.Position = new Vector2(0.0f, -pixelHeight * length);
     }
 }
