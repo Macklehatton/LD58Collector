@@ -7,6 +7,7 @@ public partial class Enemy : Area2D
     [Export] private float aggroRange;
     [Export] private float speed;
     [Export] private float waryDistance;
+    [Export] private Node2D weapon;
 
     private EnemyState state;
     private Node2D orbitPivot;
@@ -53,6 +54,7 @@ public partial class Enemy : Area2D
 
     public void TakeDamage()
     {
+        weapon.Reparent(GetTree().Root);
         QueueFree();
     }
 }
