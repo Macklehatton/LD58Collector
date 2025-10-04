@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx8vvh801ws8k"]
+[gd_scene load_steps=5 format=3 uid="uid://cx8vvh801ws8k"]
 
 [ext_resource type="Script" uid="uid://ciw83583k6dr" path="res://PlayerMovement.cs" id="1_uu6xs"]
 [ext_resource type="Texture2D" uid="uid://dywjlx80hdfgq" path="res://icon.svg" id="2_r0du0"]
+[ext_resource type="Script" uid="uid://b2y0ljc3bnyl5" path="res://Sword.cs" id="3_cm0pq"]
+[ext_resource type="Texture2D" uid="uid://ckpteoyej48yw" path="res://SwordTile.png" id="3_r0du0"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -9,14 +11,31 @@
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_uu6xs")
-speed = 500.0
+speed = 5.0
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="CharacterSprite" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_r0du0")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(308, 57)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_r0du0")
+
+[node name="Sword" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+position = Vector2(0, -100)
+script = ExtResource("3_cm0pq")
+minLength = 1.5
+maxLength = 4.0
+minWidth = 0.25
+maxWidth = 1.25
+sprite = NodePath("SwordSprite")
+
+[node name="SwordSprite" type="Sprite2D" parent="Sword"]
+scale = Vector2(0.305875, 3.47938)
+texture = ExtResource("3_r0du0")
+offset = Vector2(0, -16)
