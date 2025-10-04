@@ -40,7 +40,7 @@ position = Vector2(110, 0)
 script = ExtResource("2_trn2v")
 player = NodePath("../Player")
 aggroRange = 10.0
-speed = 180.0
+speed = 150.0
 waryDistance = 150.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="Enemy"]
@@ -53,14 +53,14 @@ polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_uu6xs")
-speed = 200.0
+speed = 225.0
 
 [node name="PlayerAttack" type="Node2D" parent="Player" node_paths=PackedStringArray("weaponObject", "weaponArea", "trail")]
 script = ExtResource("2_3dxm6")
 weaponObject = NodePath("../WeaponPointing/RandomSword")
 weaponArea = NodePath("../WeaponPointing/RandomSword/Area2D")
 trail = NodePath("../../Trail")
-swingTime = 0.2
+swingTime = 0.4
 swingAngle = 1.5
 targetGroup = "Enemy"
 

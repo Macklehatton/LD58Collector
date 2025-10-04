@@ -8,6 +8,8 @@ public partial class PlayerMovement : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        UpdateRotation();
+
         float yInput = Input.GetAxis("Down", "Up");
         float xInput = Input.GetAxis("Left", "Right");
 
@@ -16,5 +18,14 @@ public partial class PlayerMovement : CharacterBody2D
         Velocity = movement.Normalized() * speed;
 
         MoveAndSlide();
+    }
+
+    public void UpdateRotation()
+    {
+        var camera = GetViewport().GetCamera2D();
+        Vector2 mousePosition = camera.GetGlobalMousePosition();
+
+        LookAt(mousePosition);
+        Rotate(Mathf.Pi / 2.0f);
     }
 }
