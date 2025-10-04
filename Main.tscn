@@ -26,7 +26,19 @@ size = Vector2(10.6317, 86.7207)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Trail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
+[node name="EnemyTrail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
+position = Vector2(2, 0)
+width = 50.0
+width_curve = SubResource("Curve_trn2v")
+gradient = SubResource("Gradient_lgr22")
+joint_mode = 1
+round_precision = 32
+antialiased = true
+script = ExtResource("6_lgr22")
+swordTip = NodePath("../Player/WeaponPointing/RandomSword/SwordTip")
+pointCount = 256
+
+[node name="PlayerTrail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
 position = Vector2(1, 0)
 width = 50.0
 width_curve = SubResource("Curve_trn2v")
@@ -87,7 +99,7 @@ speed = 225.0
 script = ExtResource("2_3dxm6")
 weaponObject = NodePath("../WeaponPointing/RandomSword")
 weaponArea = NodePath("../WeaponPointing/RandomSword/Area2D")
-trail = NodePath("../../Trail")
+trail = NodePath("../../PlayerTrail")
 swingTime = 0.4
 swingAngle = 1.5
 targetGroup = "Enemy"
