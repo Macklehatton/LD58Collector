@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [Tool]
-public partial class Sword : Node2D
+public partial class RandomSword : Node2D
 {
     [Export] private float minLength;
     [Export] private float maxLength;
@@ -25,7 +25,6 @@ public partial class Sword : Node2D
     {
         Randomize();
     }
-
 
     private void Randomize()
     {
