@@ -44,8 +44,7 @@ public partial class PlayerAttack : Node2D
             {
                 if (body.IsInGroup(targetGroup))
                 {
-                    Debug.WriteLine(targetGroup);
-                    //(Enemy)
+                    ((Enemy)body).TakeDamage();
                 }
             }
         }
