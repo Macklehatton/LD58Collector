@@ -36,6 +36,9 @@ public partial class Enemy : Area2D
         {
             Wary((float)delta);
         }
+
+        LookAt(player.GlobalPosition);
+        Rotate(Mathf.Pi / 2.0f);
     }
 
     private void Wary(float delta)

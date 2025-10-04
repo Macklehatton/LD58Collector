@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx8vvh801ws8k"]
+[gd_scene load_steps=13 format=3 uid="uid://cx8vvh801ws8k"]
 
 [ext_resource type="Script" uid="uid://ciw83583k6dr" path="res://Scripts/PlayerMovement.cs" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://brrvxwtxdvw7q" path="res://Scripts/PlayerAttack.cs" id="2_3dxm6"]
@@ -15,6 +15,9 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_lgr22"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_03owx"]
+size = Vector2(27.2408, 114.86)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trn2v"]
 size = Vector2(10.6317, 86.7207)
@@ -50,6 +53,31 @@ texture = ExtResource("2_r0du0")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy"]
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
+
+[node name="RandomSword" type="Node2D" parent="Enemy" node_paths=PackedStringArray("sprite", "swordTip", "collisionShape")]
+script = ExtResource("2_cm0pq")
+minLength = 1.5
+maxLength = 4.0
+minWidth = 0.25
+maxWidth = 1.25
+sprite = NodePath("SwordSprite")
+swordTip = NodePath("SwordTip")
+collisionShape = NodePath("Area2D/CollisionShape2D")
+
+[node name="SwordSprite" type="Sprite2D" parent="Enemy/RandomSword"]
+z_index = -1
+scale = Vector2(0.851273, 3.58938)
+texture = ExtResource("3_r0du0")
+offset = Vector2(0, -16)
+
+[node name="SwordTip" type="Node2D" parent="Enemy/RandomSword"]
+position = Vector2(0, -114.86)
+
+[node name="Area2D" type="Area2D" parent="Enemy/RandomSword"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/RandomSword/Area2D"]
+position = Vector2(0, -57.4301)
+shape = SubResource("RectangleShape2D_03owx")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_uu6xs")
