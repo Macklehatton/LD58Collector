@@ -1,40 +1,51 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class PlayerAttack : Node2D
 {
-    [Export] private PlayerWeapon weapon;
+    [Export] private Node2D weaponObject;
     [Export] private float swingTime;
     [Export] private float swingAngle;
 
-    private bool swinging;
+    private bool attacking;
     private bool hit;
 
     private float swingProgress;
-
 
     public override void _Process(double delta)
     {
         if (Input.IsActionJustPressed("PrimaryAttack"))
         {
-            Attack();
+            if (!attacking)
+            {
+                attacking = true;
+            }
         }
 
-        if (swinging)
+        if (attacking)
         {
-            Swing();
+            Swing((float)delta);
+            CheckHit();
         }
     }
 
-    public void Attack()
+    public void CheckHit()
     {
-        // Swing animation
-
         // Detect (one?) hit during swing
     }
 
-    private void Swing()
+    private void Swing(float delta)
     {
+        swingProgress += delta;
 
+        weaponObject.Rotation = Mathf.Pi / 2.0f;
+
+        if (swingProgress >= swingTime)
+        {
+            weaponObject.Rotation = 0.0f;
+            swingProgress = 0.0f;
+            attacking = false;
+        }
     }
 }

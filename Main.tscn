@@ -15,14 +15,16 @@
 script = ExtResource("1_uu6xs")
 speed = 200.0
 
-[node name="PlayerAttack" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("weapon")]
+[node name="PlayerAttack" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("weaponObject")]
 script = ExtResource("2_3dxm6")
-weapon = NodePath("../PlayerWeapon")
+weaponObject = NodePath("../WeaponPointing/Sword")
+swingTime = 1.0
+swingAngle = 1.0
 
-[node name="PlayerWeapon" type="Node2D" parent="CharacterBody2D"]
+[node name="WeaponPointing" type="Node2D" parent="CharacterBody2D"]
 script = ExtResource("2_fos0i")
 
-[node name="Sword" type="Node2D" parent="CharacterBody2D/PlayerWeapon" node_paths=PackedStringArray("sprite")]
+[node name="Sword" type="Node2D" parent="CharacterBody2D/WeaponPointing" node_paths=PackedStringArray("sprite")]
 script = ExtResource("2_cm0pq")
 minLength = 1.5
 maxLength = 4.0
@@ -30,8 +32,8 @@ minWidth = 0.25
 maxWidth = 1.25
 sprite = NodePath("SwordSprite")
 
-[node name="SwordSprite" type="Sprite2D" parent="CharacterBody2D/PlayerWeapon/Sword"]
-scale = Vector2(0.62755, 2.21802)
+[node name="SwordSprite" type="Sprite2D" parent="CharacterBody2D/WeaponPointing/Sword"]
+scale = Vector2(1.11588, 2.02444)
 texture = ExtResource("3_r0du0")
 offset = Vector2(0, -16)
 
