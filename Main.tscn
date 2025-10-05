@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cx8vvh801ws8k"]
+[gd_scene load_steps=18 format=3 uid="uid://cx8vvh801ws8k"]
 
 [ext_resource type="Script" uid="uid://ciw83583k6dr" path="res://Scripts/PlayerMovement.cs" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://cjdr0uhehpij0" path="res://Inventory.cs" id="1_wkp8b"]
@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://cy5bscibbfed5" path="res://Prefabs/InventoryTile.tscn" id="2_20pc6"]
 [ext_resource type="Script" uid="uid://cmv5p5f4wpkl" path="res://Scripts/RandomSword.cs" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://cp7pam07eek7r" path="res://Scripts/PlayerWeapon.cs" id="2_fos0i"]
-[ext_resource type="Texture2D" uid="uid://dywjlx80hdfgq" path="res://icon.svg" id="2_r0du0"]
 [ext_resource type="Script" uid="uid://ce25jfr12pud8" path="res://Scripts/Enemy.cs" id="2_trn2v"]
 [ext_resource type="Texture2D" uid="uid://ckpteoyej48yw" path="res://Textures/SwordTile.png" id="3_r0du0"]
+[ext_resource type="Texture2D" uid="uid://dibadti14rxf5" path="res://Textures/Pawn.png" id="5_5vvyt"]
 [ext_resource type="Script" uid="uid://bfnqj1owfxkse" path="res://Scripts/Trail.cs" id="6_lgr22"]
 [ext_resource type="Script" uid="uid://boiqerq0c3hqi" path="res://PickupItem.cs" id="7_03owx"]
+[ext_resource type="Texture2D" uid="uid://dyx7nxfobqxwu" path="res://Textures/Player.png" id="12_5vvyt"]
 
 [sub_resource type="Curve" id="Curve_trn2v"]
 _data = [Vector2(0, 0.761636), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -42,8 +43,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="EnemyTrail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
 position = Vector2(2, 0)
@@ -79,14 +78,15 @@ waryDistance = 150.0
 weapon = NodePath("RandomSword")
 
 [node name="CharacterSprite" type="Sprite2D" parent="Enemy"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_r0du0")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_5vvyt")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy"]
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
 
 [node name="RandomSword" type="Node2D" parent="Enemy" node_paths=PackedStringArray("sprite", "swordTip", "collisionShape", "collisionArea")]
+position = Vector2(15, -12)
 script = ExtResource("2_cm0pq")
 minLength = 1.5
 maxLength = 4.0
@@ -116,6 +116,8 @@ shape = SubResource("RectangleShape2D_03owx")
 script = ExtResource("1_uu6xs")
 speed = 225.0
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
 [node name="PickupArea" type="Area2D" parent="Player"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickupArea"]
@@ -137,6 +139,7 @@ swingAngle = 1.5
 targetGroup = "Enemy"
 
 [node name="WeaponPointing" type="Node2D" parent="Player"]
+position = Vector2(15, -12)
 script = ExtResource("2_fos0i")
 
 [node name="RandomSword" type="Node2D" parent="Player/WeaponPointing" node_paths=PackedStringArray("sprite", "swordTip", "collisionShape", "collisionArea")]
@@ -166,8 +169,8 @@ position = Vector2(0, -43.3604)
 shape = SubResource("RectangleShape2D_trn2v")
 
 [node name="CharacterSprite" type="Sprite2D" parent="Player"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_r0du0")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("12_5vvyt")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
 scale = Vector2(0.25, 0.25)
