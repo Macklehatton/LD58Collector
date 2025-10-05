@@ -48,8 +48,6 @@ public partial class Enemy : Area2D
         Vector2 direction = (player.GlobalPosition - GlobalPosition).Normalized();
 
         GlobalPosition = GlobalPosition.MoveToward(player.GlobalPosition - (direction * waryDistance), speed * delta);
-
-        //GlobalPosition = GlobalPosition.MoveToward(orbitObject.GlobalPosition, speed * delta);
     }
 
     public void TakeDamage()
