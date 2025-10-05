@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy5bscibbfed5"]
+
+[ext_resource type="Texture2D" uid="uid://ckpteoyej48yw" path="res://Textures/SwordTile.png" id="1_ccvbu"]
+
+[node name="InventoryTile" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ccvbu")
