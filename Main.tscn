@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cx8vvh801ws8k"]
+[gd_scene load_steps=16 format=3 uid="uid://cx8vvh801ws8k"]
 
 [ext_resource type="Script" uid="uid://ciw83583k6dr" path="res://Scripts/PlayerMovement.cs" id="1_uu6xs"]
+[ext_resource type="Script" uid="uid://cjdr0uhehpij0" path="res://Inventory.cs" id="1_wkp8b"]
 [ext_resource type="Script" uid="uid://brrvxwtxdvw7q" path="res://Scripts/PlayerAttack.cs" id="2_3dxm6"]
 [ext_resource type="Script" uid="uid://cmv5p5f4wpkl" path="res://Scripts/RandomSword.cs" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://cp7pam07eek7r" path="res://Scripts/PlayerWeapon.cs" id="2_fos0i"]
@@ -26,7 +27,27 @@ radius = 20.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trn2v"]
 size = Vector2(10.6317, 86.7207)
 
-[node name="Node2D" type="Node2D"]
+[node name="Root" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("gridContainer", "itemTile")]
+script = ExtResource("1_wkp8b")
+gridContainer = NodePath("../GridContainer")
+itemTile = NodePath("../Control")
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control"]
+texture = ExtResource("3_r0du0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -106,10 +127,11 @@ speed = 225.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickupArea"]
 shape = SubResource("CircleShape2D_03owx")
 
-[node name="Pickup" type="Node2D" parent="Player" node_paths=PackedStringArray("pickupArea")]
+[node name="Pickup" type="Node2D" parent="Player" node_paths=PackedStringArray("pickupArea", "inventory")]
 script = ExtResource("7_03owx")
 pickupArea = NodePath("../PickupArea")
 pickupGroup = "Pickup"
+inventory = NodePath("../../CanvasLayer/Inventory")
 
 [node name="PlayerAttack" type="Node2D" parent="Player" node_paths=PackedStringArray("weaponObject", "weaponArea", "trail")]
 script = ExtResource("2_3dxm6")

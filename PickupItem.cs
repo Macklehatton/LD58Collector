@@ -7,6 +7,7 @@ public partial class PickupItem : Node2D
 {
     [Export] private Area2D pickupArea;
     [Export] private string pickupGroup;
+    [Export] private Inventory inventory;
 
     public override void _Process(double delta)
     {
@@ -19,6 +20,7 @@ public partial class PickupItem : Node2D
                 {
                     Debug.WriteLine("Pickup");
                     area.GetParent().QueueFree();
+                    inventory.AddItem();
                 }
             }
         }
