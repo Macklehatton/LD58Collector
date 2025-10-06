@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 
 [Tool]
 public partial class RandomSword : Node2D
@@ -19,11 +21,10 @@ public partial class RandomSword : Node2D
     public Callable RandomizeButton => Callable.From(Randomize);
 
     public bool Dropped { get; set; }
+    public Sprite2D Sprite { get => sprite; set => sprite = value; }
 
-    public override void _Ready()
-    {
-        Randomize();
-    }
+    public float Width;
+    public float Length;
 
     public override void _Process(double delta)
     {
@@ -37,17 +38,17 @@ public partial class RandomSword : Node2D
         }
     }
 
-    private void Randomize()
+    public void Randomize()
     {
         RandomNumberGenerator rng = new RandomNumberGenerator();
-        float length = rng.RandfRange(minLength, maxLength);
-        float width = rng.RandfRange(minWidth, maxWidth);
+        Width = rng.RandfRange(minWidth, maxWidth);
+        Length = rng.RandfRange(minLength, maxLength);
 
-        sprite.Scale = new Vector2(width, length);
-        OffsetBladeSprite(width, length);
+        sprite.Scale = new Vector2(Width, Length);
+        OffsetBladeSprite(Width, Length);
     }
 
-    private void OffsetBladeSprite(float width, float length)
+    public void OffsetBladeSprite(float width, float length)
     {
         float pixelHeight = sprite.Texture.GetHeight();
         float pixelWidth = sprite.Texture.GetWidth();
@@ -66,5 +67,17 @@ public partial class RandomSword : Node2D
     public void SetDropped()
     {
         collisionArea.AddToGroup("Pickup");
+    }
+
+    public static RandomSword GetDuplicate(RandomSword original)
+    {
+        RandomSword copy = (RandomSword)original.Duplicate();
+
+        //scopy.Width = Width;
+        //copy.Length = Length;
+        //copy.sprite.Scale = new Vector2(Width, Length);
+        //copy.OffsetBladeSprite(Width, Length);
+
+        return copy;
     }
 }

@@ -36,14 +36,23 @@ size = Vector2(10.6317, 86.7207)
 
 [node name="Inventory" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("gridContainer")]
 script = ExtResource("1_wkp8b")
-gridContainer = NodePath("../GridContainer")
+gridContainer = NodePath("../MarginContainer/GridContainer")
 itemTile = ExtResource("2_20pc6")
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_left = 96.0
+offset_right = 96.0
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/h_separation = 48
+theme_override_constants/v_separation = 48
+columns = 16
 
 [node name="EnemyTrail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
 position = Vector2(2, 0)

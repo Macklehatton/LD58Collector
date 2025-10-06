@@ -25,17 +25,26 @@ public partial class PlayerAttack : Node2D
             if (!attacking)
             {
                 attacking = true;
+                hit = false;
             }
         }
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (attacking)
+        if (!attacking)
         {
-            Swing((float)delta);
-            CheckHit();
+            return;
         }
+
+        Swing((float)delta);
+
+        if (hit)
+        {
+            return;
+        }
+
+        CheckHit();
     }
 
     public void CheckHit()
@@ -48,6 +57,7 @@ public partial class PlayerAttack : Node2D
                 if (body.IsInGroup(targetGroup))
                 {
                     ((Enemy)body).TakeDamage();
+                    hit = true;
                 }
             }
         }
@@ -65,10 +75,15 @@ public partial class PlayerAttack : Node2D
 
         if (swingProgress >= swingTime)
         {
-            weaponObject.Rotation = 0.0f;
-            swingProgress = 0.0f;
-            attacking = false;
-            trail.StopTrail();
+            StopSwing();
         }
+    }
+
+    private void StopSwing()
+    {
+        weaponObject.Rotation = 0.0f;
+        swingProgress = 0.0f;
+        attacking = false;
+        trail.StopTrail();
     }
 }

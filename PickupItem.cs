@@ -18,7 +18,6 @@ public partial class PickupItem : Node2D
             {
                 if (area.IsInGroup(pickupGroup))
                 {
-                    Debug.WriteLine("Pickup");
                     area.GetParent().QueueFree();
                     inventory.AddItem();
                 }

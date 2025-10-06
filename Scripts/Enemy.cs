@@ -52,8 +52,12 @@ public partial class Enemy : Area2D
 
     public void TakeDamage()
     {
-        weapon.Reparent(GetTree().Root);
-        weapon.SetDropped();
-        QueueFree();
+        RandomSword dropped = RandomSword.GetDuplicate(weapon);
+        dropped.Position = GlobalPosition;
+        dropped.Rotation = GlobalRotation;
+        GetTree().Root.AddChild(dropped);
+        dropped.SetDropped();
+
+        weapon.Randomize();
     }
 }
