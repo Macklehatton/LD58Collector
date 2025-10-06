@@ -24,6 +24,7 @@ public partial class RandomSword : Node2D
     public Sprite2D Sprite { get => sprite; set => sprite = value; }
     public CollisionShape2D CollisionShape { get => collisionShape; }
     public Area2D CollisionArea { get => collisionArea; }
+    public Vector2 SwordTip { get => swordTip.GlobalPosition; }
 
     public float Width;
     public float Length;

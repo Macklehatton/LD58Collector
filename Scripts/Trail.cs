@@ -3,7 +3,6 @@ using System;
 
 public partial class Trail : Line2D
 {
-    [Export] private Node2D swordTip;
     [Export] private int pointCount;
 
     //private Vector2 trailPosition;
@@ -19,7 +18,7 @@ public partial class Trail : Line2D
         Reset();
     }
 
-    public void UpdateTrail(float factor)
+    public void UpdateTrail(float factor, Vector2 swordTip)
     {
         int currentPoint = (int)(pointCount * factor);
 
@@ -30,7 +29,7 @@ public partial class Trail : Line2D
 
         //trailPosition = trailPosition.MoveToward(swordTip.GlobalPosition, trailSpeed * (float)delta);
 
-        AddPoint(swordTip.GlobalPosition);
+        AddPoint(swordTip);
     }
 
     private void Reset()
