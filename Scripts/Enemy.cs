@@ -8,10 +8,15 @@ public partial class Enemy : Area2D
     [Export] private float speed;
     [Export] private float waryDistance;
     [Export] private RandomSword weapon;
+    [Export] private float strafeDistance;
+    [Export] private float strafeRate;
 
     private EnemyState state;
     private Node2D orbitPivot;
     private Node2D orbitObject;
+
+    private float currentStrafeOffset;
+    private float time;
 
     public override void _Ready()
     {
@@ -33,6 +38,11 @@ public partial class Enemy : Area2D
 
     public override void _PhysicsProcess(double delta)
     {
+        time += (float)delta;
+
+        currentStrafeOffset = Mathf.Sin(time * strafeRate);
+        currentStrafeOffset *= strafeDistance;
+
         if (state == EnemyState.wary)
         {
             Wary((float)delta);
@@ -44,10 +54,13 @@ public partial class Enemy : Area2D
 
     private void Wary(float delta)
     {
-        float distance = GlobalPosition.DistanceTo(player.GlobalPosition);
         Vector2 direction = (player.GlobalPosition - GlobalPosition).Normalized();
 
-        GlobalPosition = GlobalPosition.MoveToward(player.GlobalPosition - (direction * waryDistance), speed * delta);
+        Vector2 desiredPosition = player.GlobalPosition - (direction * waryDistance);
+        Vector2 tangent = direction.Normalized().Rotated(Mathf.Pi / 2.0f);
+        desiredPosition += tangent * currentStrafeOffset;
+
+        GlobalPosition = GlobalPosition.MoveToward(desiredPosition, speed * delta);
     }
 
     public void TakeDamage()
@@ -58,6 +71,11 @@ public partial class Enemy : Area2D
         GetTree().Root.AddChild(dropped);
         dropped.SetDropped();
 
+        Respawn();
+    }
+
+    public void Respawn()
+    {
         weapon.Randomize();
     }
 }
