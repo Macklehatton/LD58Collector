@@ -58,7 +58,7 @@ public partial class Enemy : Area2D
         Vector2 tangent = direction.Normalized().Rotated(Mathf.Pi / 2.0f);
         desiredPosition += tangent * currentStrafeOffset;
 
-        GlobalPosition = GlobalPosition.MoveToward(desiredPosition, speed * delta);
+        GlobalPosition = GlobalPosition.MoveToward(desiredPosition, speed);
 
         float desiredRotation = GlobalTransform.X.AngleTo(direction);
         GlobalRotation = Mathf.MoveToward(GlobalRotation, desiredRotation, rotationSpeed);
