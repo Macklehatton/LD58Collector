@@ -89,6 +89,7 @@ weapon = NodePath("RandomSword")
 strafeDistance = 2.0
 strafeRate = 3.0
 rotationSpeed = 0.05
+respawnRadius = 500.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="Enemy"]
 scale = Vector2(1.5, 1.5)

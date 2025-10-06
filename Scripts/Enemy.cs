@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class Enemy : Area2D
 {
@@ -83,6 +84,11 @@ public partial class Enemy : Area2D
 
     public void Respawn()
     {
+        float angle = rng.Randf() * Mathf.Tau;
+        Vector2 direction = Vector2.Up.Rotated(angle);
+
+        GlobalPosition += direction * respawnRadius;
+
         weapon.Randomize();
     }
 }
