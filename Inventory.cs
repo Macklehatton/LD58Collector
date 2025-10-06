@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public partial class Inventory : Node
 {
@@ -8,6 +9,7 @@ public partial class Inventory : Node
     [Export] private PackedScene itemTile;
     [Export] private Node2D weaponContainer;
     [Export] private PlayerAttack playerAttack;
+    [Export] private Sprite2D selection;
 
     private List<RandomSword> inventory;
 
@@ -17,9 +19,8 @@ public partial class Inventory : Node
     public override void _Ready()
     {
         inventory = new List<RandomSword>();
-        inventory.Add((RandomSword)weaponContainer.GetChild(0));
-
         equippedWeapon = (RandomSword)weaponContainer.GetChild(0);
+        AddItem(equippedWeapon);
     }
 
     public override void _Process(double delta)
@@ -38,10 +39,14 @@ public partial class Inventory : Node
         }
 
         selectedIndex += 1;
-        if (selectedIndex >= inventory.Count)
+        if (selectedIndex > inventory.Count - 1)
         {
             selectedIndex = 0;
         }
+
+        Control child = (Control)gridContainer.GetChild(selectedIndex);
+        selection.GlobalPosition = child.GlobalPosition;
+
 
         Unequip(equippedWeapon);
         Equip(selectedIndex);

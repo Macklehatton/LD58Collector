@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cx8vvh801ws8k"]
+[gd_scene load_steps=21 format=3 uid="uid://cx8vvh801ws8k"]
 
 [ext_resource type="Script" uid="uid://ciw83583k6dr" path="res://Scripts/PlayerMovement.cs" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://cjdr0uhehpij0" path="res://Inventory.cs" id="1_wkp8b"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://ce25jfr12pud8" path="res://Scripts/Enemy.cs" id="2_trn2v"]
 [ext_resource type="FontFile" uid="uid://duxquy3sfrmv2" path="res://Jacquard12-Regular.ttf" id="3_c2ibq"]
 [ext_resource type="Texture2D" uid="uid://ckpteoyej48yw" path="res://Textures/SwordTile.png" id="3_r0du0"]
+[ext_resource type="Texture2D" uid="uid://b6yyhtpwxmexl" path="res://Textures/Selection.png" id="4_j4qnp"]
 [ext_resource type="Texture2D" uid="uid://dibadti14rxf5" path="res://Textures/Pawn.png" id="5_5vvyt"]
 [ext_resource type="Script" uid="uid://bfnqj1owfxkse" path="res://Scripts/Trail.cs" id="6_lgr22"]
 [ext_resource type="Script" uid="uid://boiqerq0c3hqi" path="res://PickupItem.cs" id="7_03owx"]
@@ -35,12 +36,17 @@ size = Vector2(10.6317, 86.7207)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Inventory" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("gridContainer", "weaponContainer", "playerAttack")]
+[node name="Inventory" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("gridContainer", "weaponContainer", "playerAttack", "selection")]
 script = ExtResource("1_wkp8b")
 gridContainer = NodePath("../MarginContainer/GridContainer")
 itemTile = ExtResource("2_20pc6")
 weaponContainer = NodePath("../../Player/WeaponPointing")
 playerAttack = NodePath("../../Player/PlayerAttack")
+selection = NodePath("../Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(160, 64)
+texture = ExtResource("4_j4qnp")
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 5
@@ -73,7 +79,7 @@ theme_override_constants/h_separation = 48
 theme_override_constants/v_separation = 48
 columns = 16
 
-[node name="EnemyTrail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
+[node name="EnemyTrail" type="Line2D" parent="."]
 position = Vector2(2, 0)
 width = 50.0
 width_curve = SubResource("Curve_trn2v")
@@ -82,10 +88,9 @@ joint_mode = 1
 round_precision = 32
 antialiased = true
 script = ExtResource("6_lgr22")
-swordTip = NodePath("../Player/WeaponPointing/RandomSword/SwordTip")
 pointCount = 256
 
-[node name="PlayerTrail" type="Line2D" parent="." node_paths=PackedStringArray("swordTip")]
+[node name="PlayerTrail" type="Line2D" parent="."]
 position = Vector2(1, 0)
 width = 50.0
 width_curve = SubResource("Curve_trn2v")
@@ -94,7 +99,6 @@ joint_mode = 1
 round_precision = 32
 antialiased = true
 script = ExtResource("6_lgr22")
-swordTip = NodePath("../Player/WeaponPointing/RandomSword/SwordTip")
 pointCount = 256
 
 [node name="Enemy" type="Area2D" parent="." node_paths=PackedStringArray("player", "weapon") groups=["Enemy"]]
