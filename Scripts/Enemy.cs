@@ -60,10 +60,10 @@ public partial class Enemy : Area2D
 
         GlobalPosition = GlobalPosition.MoveToward(desiredPosition, speed);
 
-        float desiredRotation = GlobalTransform.X.AngleTo(direction);
-        GlobalRotation = Mathf.MoveToward(GlobalRotation, desiredRotation, rotationSpeed);
-
-        //Rotate(Mathf.Pi / 2.0f);
+        float desiredRotation = Transform.X.AngleTo(direction);
+        desiredRotation += Mathf.Pi / 2.0f;
+        float rotation = Mathf.MoveToward(0.0f, desiredRotation, rotationSpeed);
+        Rotate(rotation);
     }
 
     public void TakeDamage()
