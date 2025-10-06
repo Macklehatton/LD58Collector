@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cy5bscibbfed5" path="res://Prefabs/InventoryTile.tscn" id="2_20pc6"]
 [ext_resource type="Script" uid="uid://cmv5p5f4wpkl" path="res://Scripts/RandomSword.cs" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://cp7pam07eek7r" path="res://Scripts/PlayerWeapon.cs" id="2_fos0i"]
-[ext_resource type="Texture2D" uid="uid://dywjlx80hdfgq" path="res://icon.svg" id="2_r0du0"]
 [ext_resource type="Script" uid="uid://ce25jfr12pud8" path="res://Scripts/Enemy.cs" id="2_trn2v"]
 [ext_resource type="Texture2D" uid="uid://ckpteoyej48yw" path="res://Textures/SwordTile.png" id="3_r0du0"]
 [ext_resource type="Texture2D" uid="uid://dibadti14rxf5" path="res://Textures/Pawn.png" id="5_5vvyt"]
 [ext_resource type="Script" uid="uid://bfnqj1owfxkse" path="res://Scripts/Trail.cs" id="6_lgr22"]
 [ext_resource type="Script" uid="uid://boiqerq0c3hqi" path="res://PickupItem.cs" id="7_03owx"]
 [ext_resource type="Texture2D" uid="uid://dyx7nxfobqxwu" path="res://Textures/Player.png" id="12_5vvyt"]
+[ext_resource type="Texture2D" uid="uid://ci7tqr8g03d2j" path="res://Textures/Circle.png" id="13_c2ibq"]
 
 [sub_resource type="Curve" id="Curve_trn2v"]
 _data = [Vector2(0, 0.761636), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -192,11 +192,9 @@ texture = ExtResource("12_5vvyt")
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-446, 225)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("2_r0du0")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
+[node name="Circle" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+z_index = -4
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("13_c2ibq")
