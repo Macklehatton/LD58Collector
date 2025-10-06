@@ -10,6 +10,7 @@ public partial class Enemy : Area2D
     [Export] private RandomSword weapon;
     [Export] private float strafeDistance;
     [Export] private float strafeRate;
+    [Export] private float rotationSpeed;
 
     private EnemyState state;
     private Node2D orbitPivot;
@@ -47,9 +48,6 @@ public partial class Enemy : Area2D
         {
             Wary((float)delta);
         }
-
-        LookAt(player.GlobalPosition);
-        Rotate(Mathf.Pi / 2.0f);
     }
 
     private void Wary(float delta)
@@ -61,6 +59,11 @@ public partial class Enemy : Area2D
         desiredPosition += tangent * currentStrafeOffset;
 
         GlobalPosition = GlobalPosition.MoveToward(desiredPosition, speed * delta);
+
+        float desiredRotation = GlobalTransform.X.AngleTo(direction);
+        GlobalRotation = Mathf.MoveToward(GlobalRotation, desiredRotation, rotationSpeed);
+
+        //Rotate(Mathf.Pi / 2.0f);
     }
 
     public void TakeDamage()
