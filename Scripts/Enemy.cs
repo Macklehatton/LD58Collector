@@ -11,6 +11,7 @@ public partial class Enemy : Area2D
     [Export] private float strafeDistance;
     [Export] private float strafeRate;
     [Export] private float rotationSpeed;
+    [Export] private float respawnRadius;
 
     private EnemyState state;
     private Node2D orbitPivot;
@@ -18,6 +19,8 @@ public partial class Enemy : Area2D
 
     private float currentStrafeOffset;
     private float time;
+
+    private RandomNumberGenerator rng;
 
     public override void _Ready()
     {
@@ -35,6 +38,8 @@ public partial class Enemy : Area2D
 
         orbitPivot.Position = Vector2.Zero;
         orbitObject.Position = new Vector2(0.0f, -waryDistance);
+
+        rng = new RandomNumberGenerator();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -60,8 +65,7 @@ public partial class Enemy : Area2D
 
         GlobalPosition = GlobalPosition.MoveToward(desiredPosition, speed);
 
-        float desiredRotation = Transform.X.AngleTo(direction);
-        desiredRotation += Mathf.Pi / 2.0f;
+        float desiredRotation = Transform.Y.AngleTo(-direction);
         float rotation = Mathf.MoveToward(0.0f, desiredRotation, rotationSpeed);
         Rotate(rotation);
     }

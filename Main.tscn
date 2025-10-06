@@ -83,6 +83,7 @@ position = Vector2(110, 0)
 script = ExtResource("2_trn2v")
 player = NodePath("../Player")
 aggroRange = 10.0
+speed = 2.0
 waryDistance = 150.0
 weapon = NodePath("RandomSword")
 strafeDistance = 2.0
