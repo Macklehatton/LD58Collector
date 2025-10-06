@@ -86,4 +86,10 @@ public partial class PlayerAttack : Node2D
         attacking = false;
         trail.StopTrail();
     }
+
+    public void ChangeWeapon(RandomSword randomSword)
+    {
+        weaponObject = randomSword;
+        weaponArea = randomSword.CollisionArea;
+    }
 }

@@ -34,10 +34,12 @@ size = Vector2(10.6317, 86.7207)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Inventory" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("gridContainer")]
+[node name="Inventory" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("gridContainer", "weaponContainer", "playerAttack")]
 script = ExtResource("1_wkp8b")
 gridContainer = NodePath("../MarginContainer/GridContainer")
 itemTile = ExtResource("2_20pc6")
+weaponContainer = NodePath("../../Player/WeaponPointing")
+playerAttack = NodePath("../../Player/PlayerAttack")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_left = 96.0
@@ -89,7 +91,7 @@ weapon = NodePath("RandomSword")
 strafeDistance = 2.0
 strafeRate = 3.0
 rotationSpeed = 0.05
-respawnRadius = 500.0
+respawnRadius = 400.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="Enemy"]
 scale = Vector2(1.5, 1.5)

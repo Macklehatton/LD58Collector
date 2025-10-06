@@ -16,11 +16,24 @@ public partial class PickupItem : Node2D
             Array<Area2D> areas = pickupArea.GetOverlappingAreas();
             foreach (Area2D area in areas)
             {
-                if (area.IsInGroup(pickupGroup))
+                if (!area.IsInGroup(pickupGroup))
                 {
-                    area.GetParent().QueueFree();
-                    inventory.AddItem();
+                    continue;
                 }
+
+                RandomSword item = (RandomSword)area.GetParent();
+
+                if (!item.Dropped)
+                {
+                    continue;
+                }
+
+                inventory.AddItem(item);
+
+                item.Visible = false;
+                item.Dropped = false;
+
+                return;
             }
         }
     }

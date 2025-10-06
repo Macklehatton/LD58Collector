@@ -22,6 +22,8 @@ public partial class RandomSword : Node2D
 
     public bool Dropped { get; set; }
     public Sprite2D Sprite { get => sprite; set => sprite = value; }
+    public CollisionShape2D CollisionShape { get => collisionShape; }
+    public Area2D CollisionArea { get => collisionArea; }
 
     public float Width;
     public float Length;
@@ -67,6 +69,7 @@ public partial class RandomSword : Node2D
     public void SetDropped()
     {
         collisionArea.AddToGroup("Pickup");
+        Dropped = true;
     }
 
     public static RandomSword GetDuplicate(RandomSword original)
